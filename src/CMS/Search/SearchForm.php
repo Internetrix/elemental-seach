@@ -26,6 +26,10 @@ class SearchForm extends SS_SearchForm
 	{
 		$supportedClasses = array(SearchDocument::class, File::class);
 
+        if (!($classes && is_array($classes))) {
+            $classes = array(SearchDocument::class, File::class);
+        }
+
 		$illegalClasses = array_diff($classes, $supportedClasses);
 		if ($illegalClasses) {
 			throw new BadMethodCallException(
@@ -36,5 +40,4 @@ class SearchForm extends SS_SearchForm
 		$legalClasses = array_intersect($classes, $supportedClasses);
 		$this->classesToSearch = $legalClasses;
 	}
-
 }
